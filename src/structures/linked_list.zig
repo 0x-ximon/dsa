@@ -314,7 +314,6 @@ const Context = struct {
     const E = L.Errors;
 
     const Errors = error{
-        AllocationFailed,
         ViolatedChainInvariant,
     };
 
