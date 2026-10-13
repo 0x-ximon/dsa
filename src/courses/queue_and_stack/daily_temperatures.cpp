@@ -1,13 +1,12 @@
 #include <stack>
 #include <utility>
 #include <vector>
-using namespace std;
 
 class Solution {
    public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
-        vector<int> answer(temperatures.size(), 0);
-        stack<pair<int, int>> s = {};
+    std::vector<int> dailyTemperatures(std::vector<int>& temperatures) {
+        std::vector<int> answer(temperatures.size(), 0);
+        std::stack<std::pair<int, int>> s = {};
 
         for (int i = 0; i < temperatures.size(); i++) {
             while (true) {

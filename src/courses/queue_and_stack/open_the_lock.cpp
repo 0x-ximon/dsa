@@ -2,16 +2,15 @@
 #include <set>
 #include <string>
 #include <vector>
-using namespace std;
 
 class Solution {
    public:
-    int openLock(vector<string>& deadends, string target) {
+    int openLock(std::vector<std::string>& deadends, std::string target) {
         int turns = 0;
-        string root = "0000";
+        std::string root = "0000";
 
-        set<string> v = {};
-        queue<string> q = {};
+        std::set<std::string> v = {};
+        std::queue<std::string> q = {};
 
         q.push(root);
         v.insert(root);
@@ -28,14 +27,12 @@ class Solution {
             int size = q.size();
 
             for (int i = 0; i < size; i++) {
-                string l = q.front();
-                if (l == target)
-                    return turns;
+                auto l = q.front();
+                if (l == target) return turns;
 
-                vector<string> children = getChildren(l);
+                auto children = getChildren(l);
                 for (auto c : children) {
-                    if (v.find(c) != v.end())
-                        continue;
+                    if (v.find(c) != v.end()) continue;
 
                     v.insert(c);
                     q.push(c);
@@ -51,11 +48,11 @@ class Solution {
     }
 
    private:
-    vector<string> getChildren(string lock) {
-        vector<string> children = {};
+    std::vector<std::string> getChildren(std::string lock) {
+        std::vector<std::string> children = {};
 
         for (int i = 0; i < lock.size(); i++) {
-            string l = lock;
+            std::string l = lock;
             int d = lock[i] - '0';
 
             // Increment

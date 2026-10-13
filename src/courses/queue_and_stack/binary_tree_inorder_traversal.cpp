@@ -1,7 +1,6 @@
 #include <set>
 #include <stack>
 #include <vector>
-using namespace std;
 
 struct Node {
     int val;
@@ -14,12 +13,12 @@ struct Node {
 
 class Solution {
    public:
-    vector<int> inorderTraversal(Node* root) {
+    std::vector<int> inorderTraversal(Node* root) {
         if (!root) return {};
 
-        vector<int> r = {};
-        set<Node*> v = {};
-        stack<Node*> s = {};
+        std::vector<int> r = {};
+        std::set<Node*> v = {};
+        std::stack<Node*> s = {};
 
         s.push(root);
         v.insert(root);
