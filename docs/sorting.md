@@ -1,38 +1,43 @@
-#+Title: Sorting
-#+Author: Simon Samuel
-#+Date: <2025-12-27 Sat>
+# Sorting
+
+*Simon Samuel · 2025-12-27*
 
 The fundamental problem of sorting is all about ordering a collection of items. Different methods of comparison may lead to different results. At the most basic level, sorting algorithms are all about rearranging elements in a collection based on a common characteristic of those elements.
 
 In computer science, we have formal definitions of sorting with respect to ordering relations.
 
 Given two elements: $a$ and $b$; An ordering relation has two key properties:
-1. Exactly one of the following must be true: $a<b$, $a=b$ or $a>b$ ( [[https://en.wikipedia.org/wiki/Trichotomy_(mathematics)][Law of Trichotomy]] )
-2. If $a<b$ and $b<c$, then $a<c$ ( [[https://en.wikipedia.org/wiki/Transitive_relation][Law of Transitivity]] )
+1. Exactly one of the following must be true: $a<b$, $a=b$ or $a>b$ ( [Law of Trichotomy](https://en.wikipedia.org/wiki/Trichotomy_(mathematics)) )
+2. If $a<b$ and $b<c$, then $a<c$ ( [Law of Transitivity](https://en.wikipedia.org/wiki/Transitive_relation) )
 
-A /sort/ is formally defined as a rearrangement of a sequence of elements that puts all elements into a non-decreasing order based on the ordering relation. An important concept in sorting is *inversions*. An /inversion/ in a sequence is defined as a pair of elements that are out of order with respect to the ordering relation.The more inversions present, the more "out of order" the list is. In fact, the concept of inversions introduces an alternative definition of sorting: *Given a sequence of elements with n inversions, a sorting algorithm is a sequence of operations that reduces inversions to 0*.
+A *sort* is formally defined as a rearrangement of a sequence of elements that puts all elements into a non-decreasing order based on the ordering relation. An important concept in sorting is **inversions**. An *inversion* in a sequence is defined as a pair of elements that are out of order with respect to the ordering relation.The more inversions present, the more "out of order" the list is. In fact, the concept of inversions introduces an alternative definition of sorting: **Given a sequence of elements with n inversions, a sorting algorithm is a sequence of operations that reduces inversions to 0**.
 
-The next important concept in sorting that we will refer back to is the *stability* of sorting algorithms. The key feature of a stable sorting algorithm is that *it will preserve the order of equal elements*.
+The next important concept in sorting that we will refer back to is the **stability** of sorting algorithms. The key feature of a stable sorting algorithm is that **it will preserve the order of equal elements**.
 
-* Comparison Based Sorts
+## Comparison Based Sorts
+
 Comparison based sorts are sorting algorithms that require a direct method of comparison defined by the ordering relation.
 
-** Selection Sort
-Selection sort will build up the sorted list by repeatedly finding the minimum element in that list and moving it to the front of the list through a swap. It will proceed to swap elements appropriately until the entire list is sorted. In terms of simplicity, it is a highly intuitive algorithm and not too difficult to write. Unfortunately, it is pretty slow, requiring $O(n^2)$ time to sort the list in the worst case. The space complexity of selection sort is $O(1)$ since we do not use any additional space during the algorithm (all operations are in-place). It also is *not a stable* sorting algorithm.
+### Selection Sort
 
-** Bubble Sort
+Selection sort will build up the sorted list by repeatedly finding the minimum element in that list and moving it to the front of the list through a swap. It will proceed to swap elements appropriately until the entire list is sorted. In terms of simplicity, it is a highly intuitive algorithm and not too difficult to write. Unfortunately, it is pretty slow, requiring $O(n^2)$ time to sort the list in the worst case. The space complexity of selection sort is $O(1)$ since we do not use any additional space during the algorithm (all operations are in-place). It also is **not a stable** sorting algorithm.
+
+### Bubble Sort
+
 Conceptually, bubble sort is an implementation of a rather simple idea. Suppose we have a collection of integers that we want to sort in ascending order. Bubble sort proceeds to consider two adjacent elements at a time. If these two adjacent elements are out of order (in this case, the left element is strictly greater than the right element), bubble sort will swap them. It then proceeds to the next pair of adjacent elements. In the first pass of bubble sort, it will process every set of adjacent elements in the collection once, making swaps as necessary. The core idea of bubble sort is it will repeat this process until no more swaps are made in a single pass, which means the list is sorted.
 
-Bubble sort, as a result, has worst case runtime of $O(n^2)$. The space complexity of bubble sort is $O(1)$. All sorting operations involve swapping adjacent elements in the original input array, so no additional space is required. Bubble sort is also *a stable* sorting algorithm since equal elements will never have swapped places, so their relative ordering will be preserved.
+Bubble sort, as a result, has worst case runtime of $O(n^2)$. The space complexity of bubble sort is $O(1)$. All sorting operations involve swapping adjacent elements in the original input array, so no additional space is required. Bubble sort is also **a stable** sorting algorithm since equal elements will never have swapped places, so their relative ordering will be preserved.
 
-** Insertion Sort
+### Insertion Sort
+
 Given a collection of integers, you can sort the list by proceeding from the start of the list, and every time you encounter an element that is out of order, you can continuously swap places with previous elements until it is inserted in its correct relative location based on what you’ve processed thus far. The space complexity of insertion sort is $O(1)$. All operations are performed in-place.
 
-Despite the $O(n^2)$ time complexity, in practice, there are a couple of advantages to insertion sort. For one, it is *a stable* sort. By design of its implementation, we will never swap an element later in the list with an equal element earlier in the list. But more importantly, there are cases where insertion sort may actually be the best sort.
+Despite the $O(n^2)$ time complexity, in practice, there are a couple of advantages to insertion sort. For one, it is **a stable** sort. By design of its implementation, we will never swap an element later in the list with an equal element earlier in the list. But more importantly, there are cases where insertion sort may actually be the best sort.
 
 Generally, on almost sorted arrays where the number of inversions is relatively small compared to the size of the array, insertion sort will be quite fast since the number of swaps required will be low on almost sorted arrays. Next, insertion sort can also be the best choice on small arrays.
 
-** Heap Sort
+### Heap Sort
+
 The core concept of the heap sort involves constructing a heap from our input and repeatedly removing the minimum/maximum element to sort the array. A naive approach to heapsort would start with creating a new array and adding elements one by one into the new array. As with previous sorting algorithms, this sorting algorithm can also be performed in place, so no extra memory is used in terms of space complexity.
 
 The key idea for in-place heapsort involves a balance of two central ideas:
@@ -46,10 +51,12 @@ Given an input array, we can represent it as a binary tree.
 
 The key aspect that makes heapsort better than selection sort is the running time of the algorithm is now $O(NlogN)$. This is a result of the fact that removing the max element from the heap, which is the central operation in the sort is an $O(logN)$ operation, which has to be performed in the worst case $N−1$ times. Note that in-place heapification is an $O(N)$ operation, so it has no impact on the worst-case time complexity of heapsort. In terms of space complexity, since we are treating the input array as a heap and creating no extra space (all operations are in-place), heapsort is $O(1)$.
 
-* Non-comparison Based Sorts
+## Non-comparison Based Sorts
+
 Non-Comparison based sorting algorithms are just as the name implies; they don't require comparisons.
 
-** Counting Sort
+### Counting Sort
+
 Here is the pseudocode for the algorithm:
 
 Given an array $A$ with elements that satisfies the properties:
@@ -59,8 +66,7 @@ Given an array $A$ with elements that satisfies the properties:
 
 You could sort an array using a single pass by:
 1. Initialize an array $B$ to size $N$.
-2. For every element ~A[i]~:
-       ~B[A[i]]~ = ~A[i]~
+2. For every element `A[i]`: `B[A[i]] = A[i]`
 
 The above algorithm is in a sense the simplest form of counting sort. Counting sort is all about using a predefined range of "keys" to construct a sorted output. There are extensions that can be made to counting sort so it can handle more input arrays:
 
@@ -68,8 +74,10 @@ The above algorithm is in a sense the simplest form of counting sort. Counting s
 - Counting sort can handle nonconsecutive keys.
 - Counting sort can handle non-numeric keys as long as they're constrained within the alphabet of constrained size.
 
-** Radix Sort
+### Radix Sort
+
 A problem we encounter with Counting sort is that it can't easily handle strings where the alphabet size could be unconstrained. Additionally, where the maximum value of the array is extraordinarily large, counting sort will lose its appeal since the additional memory overhead will slow things down. Radix sort is an extension of Counting Sort that solves these problems. There are a couple of variations of Radix sort:
 
-*** Least Significant Digit (LSD) Radix Sort
+#### Least Significant Digit (LSD) Radix Sort
+
 The basic principle of LSD Radix sort is to start with the rightmost, least significant, alphanumeric character of each integer or string and perform counting sort on just that character up until the first character. For integers that are shorter in length than the longest integer, a 0 can suffice as a padding while for strings, a special character would have to represent padding.

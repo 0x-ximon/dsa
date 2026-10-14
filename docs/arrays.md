@@ -1,14 +1,16 @@
-#+title: Arrays
-#+author: Simon Samuel
-#+date: 18th April, 2024
+# Arrays
 
-* What is an Array?
-Arrays are collections of items in which each item is stored contiguously in memory meaning checking through the entire collection is straightforward. The two most primitive Array operations are writing elements into them and reading elements from them. All other array operations are built on these two primitives. Array indexes start from ~0~ to ~N-1~ where N is the number of items in the Array.
+*Simon Samuel · 18th April, 2024*
 
-** Reading and Writing to An Array
+## What is an Array?
+
+Arrays are collections of items in which each item is stored contiguously in memory meaning checking through the entire collection is straightforward. The two most primitive Array operations are writing elements into them and reading elements from them. All other array operations are built on these two primitives. Array indexes start from `0` to `N-1` where N is the number of items in the Array.
+
+### Reading and Writing to An Array
+
 Below is the syntax for writing to and reading from an Array.
 
-#+begin_src cpp
+```cpp
 #include <iostream>
 
 int main() {
@@ -18,7 +20,6 @@ int main() {
     // Compute the size of the array.
     int n = sizeof(A) / sizeof(int);
 
-    
     for (int i = 0; i < n; i++) {
         // Set the item at the current index to i + 1.
         A[i] = i + 1;
@@ -29,12 +30,13 @@ int main() {
         std::cout << "The item is " << A[i] << "\n";
     }
 }
-#+end_src cpp
+```
 
-** Array Capacity vs Length
+### Array Capacity vs Length
+
 The capacity of an array is the number of elements it can hold and the length is the current number of elements in the array.
 
-#+begin_src cpp
+```cpp
 int main() {
     // This array has a capacity of 100 integers.
     int A[100];
@@ -44,21 +46,23 @@ int main() {
         A[i] = i + 1;
     }
 }
-#+end_src cpp
+```
 
+## Basic Array Operations
 
-* Basic Array Operations
-** Array Insertions
+### Array Insertions
+
 Inserting into an array can take many forms:
 
 1. Insert a new element at the end of the array.
 2. Insert a new element at the beginning of the array.
 3. Insert a new element at any given index of the array.
 
-*** Inserting at the End of the array.
-Using the length variable we created, we're able to easily keep track of the index to add the next element. This is a cheap operation as its time complexity is /O(1)/.
+#### Inserting at the End of the array.
 
-#+begin_src cpp
+Using the length variable we created, we're able to easily keep track of the index to add the next element. This is a cheap operation as its time complexity is *O(1)*.
+
+```cpp
 int main() {
     // Create an array that holds 5 integers.
     int A[5];
@@ -72,12 +76,13 @@ int main() {
         length++;
     }
 }
-#+end_src cpp
+```
 
-*** Inserting at the Start of the array.
-Inserting to the start of the array is a bit more complicated as we do not want to override the data that was at the beginning of the array. To preserve this value, we have to shift every element from the beginning to the length of the array to make room for the new data. This shifting operation is /O(n)/ where /n/ is the length of the array.
+#### Inserting at the Start of the array.
 
-#+begin_src cpp
+Inserting to the start of the array is a bit more complicated as we do not want to override the data that was at the beginning of the array. To preserve this value, we have to shift every element from the beginning to the length of the array to make room for the new data. This shifting operation is *O(n)* where *n* is the length of the array.
+
+```cpp
 int main() {
     // Create an array that holds 10 integers.
     int A[10];
@@ -100,12 +105,13 @@ int main() {
     // the new data.
     A[0] = 14;
 }
-#+end_src cpp
+```
 
-*** Inserting at any index of the array.
-Similar to inserting at the beginning, we simply have to move every element from the length of the array to the index we want to insert into, forward so we can override that particular index but still preserve the data. 
+#### Inserting at any index of the array.
 
-#+begin_src cpp
+Similar to inserting at the beginning, we simply have to move every element from the length of the array to the index we want to insert into, forward so we can override that particular index but still preserve the data.
+
+```cpp
 int main() {
     // Create an array that holds 10 integers.
     int A[10];
@@ -128,20 +134,21 @@ int main() {
     // We can now override the index.
     A[3] = 14;
 }
-#+end_src cpp
+```
 
+### Array Deletions
 
-** Array Deletions
 Deleting from an array can also take these forms:
 
 1. Delete an element at the end of the array.
 2. Delete an element at the beginning of the array.
 3. Delete an element at any given index of the array.
 
-*** Deleting at the End of the array.
-To delete from the end of the array simply reduce the length of the array, this means that when new data will be appended to the end of the array, it will simply override the deleted item. It is also an /O(1)/ operation.
+#### Deleting at the End of the array.
 
-#+begin_src cpp
+To delete from the end of the array simply reduce the length of the array, this means that when new data will be appended to the end of the array, it will simply override the deleted item. It is also an *O(1)* operation.
+
+```cpp
 int main() {
     // Create an array that holds 10 integers.
     int A[10];
@@ -158,12 +165,13 @@ int main() {
     // Delete the last item
     length--;
 }
-#+end_src cpp
+```
 
-*** Deleting at the Beginning of the array.
-Since we are deleting from the beginning, we have to shift the items from the length of the array backward and override the previous item before each index. This is computationally expensive as it is an /O(n)/ operation where /n/ is the length of the array.
+#### Deleting at the Beginning of the array.
 
-#+begin_src cpp
+Since we are deleting from the beginning, we have to shift the items from the length of the array backward and override the previous item before each index. This is computationally expensive as it is an *O(n)* operation where *n* is the length of the array.
+
+```cpp
 int main() {
     // Create an array that holds 10 integers.
     int A[10];
@@ -187,12 +195,13 @@ int main() {
     // the same value.
     length--;
 }
-#+end_src cpp
+```
 
-*** Deleting at any index of the array.
-Just as we did in the previous example, we're just going to begin our shift from the index we intend to delete. 
+#### Deleting at any index of the array.
 
-#+begin_src cpp
+Just as we did in the previous example, we're just going to begin our shift from the index we intend to delete.
+
+```cpp
 int main() {
     // Create an array that holds 10 integers.
     int A[10];
@@ -216,19 +225,20 @@ int main() {
     // the same value.
     length--;
 }
-#+end_src cpp
+```
 
+### Search in an Array
 
-** Search in an Array
 To find a particular element in an array, there are various methods we can employ, the two most common are:
 
 1. Linear Search
 2. Binary Search
 
-*** Linear Search
-Linear search is the most straightforward of searching algorithms, it is all about looping through the array one index at a time and comparing the current value with the expected value. Although Its runtime complexity is /O(n)/, its ease of implementation makes it the defacto for searching.
+#### Linear Search
 
-#+begin_src cpp
+Linear search is the most straightforward of searching algorithms, it is all about looping through the array one index at a time and comparing the current value with the expected value. Although Its runtime complexity is *O(n)*, its ease of implementation makes it the defacto for searching.
+
+```cpp
 #include <iostream>
 #include <optional>
 using namespace std;
@@ -264,31 +274,31 @@ int main() {
         cout << "9 is not present! \n";
     }
 }
-#+end_src cpp
+```
 
-*** Binary Search
-This is a faster search algorithm as it divides the array in half in every iteration but its major drawback is that the array must be sorted for it to work. 
+#### Binary Search
 
+This is a faster search algorithm as it divides the array in half in every iteration but its major drawback is that the array must be sorted for it to work.
 
-* In-Place Operations
-In-place operations are algorithms that modify the input array itself, they do not use additional space earning them a space complexity of /O(1)/ as new storage will be allocated in memory.
+## In-Place Operations
 
-** The Two Pointer Approach
+In-place operations are algorithms that modify the input array itself, they do not use additional space earning them a space complexity of *O(1)* as new storage will be allocated in memory.
+
+### The Two Pointer Approach
+
 This is a popular style for efficiently solving problems that require in-place solutions. Here is a popular example of such a problem.
 
-#+begin_src markdown
-  *Problem*:  Remove the duplicates such that each element appears only once.
-  *Input*:    A sorted integer array => [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
-  *Output*:   A sorted integer array with no duplicates => [0, 1, 2, 3, 4]
-#+end_src
+> **Problem**: Remove the duplicates such that each element appears only once.\
+> **Input**: A sorted integer array => `[0, 0, 1, 1, 1, 2, 2, 3, 3, 4]`\
+> **Output**: A sorted integer array with no duplicates => `[0, 1, 2, 3, 4]`
 
 This problem is relatively easy to solve when you create a new array and only clone single items but there is a better and more efficient way to solve the problem without creating a new array. To solve it in-place, we can employ the Two Pointer Approach:
 
-    1. We create two variables: ~readPointer~ and ~writePointer~.
-    2. The ~writePointer~ is responsible for keeping track of our current index for us to insert data into.
-    3. The ~readPointer~ is responsible for reading the items in the array.
+1. We create two variables: `readPointer` and `writePointer`.
+2. The `writePointer` is responsible for keeping track of our current index for us to insert data into.
+3. The `readPointer` is responsible for reading the items in the array.
 
-#+begin_src cpp
+```cpp
 #include "iostream"
 using namespace std;
 
@@ -336,6 +346,6 @@ int main() {
     cout << "}."
          << "\n";
 }
-#+end_src cpp
+```
 
-This solution is optimal as we only check each item once so it has a time complexity of /O(n)/ and a space complexity of /O(1)/.
+This solution is optimal as we only check each item once so it has a time complexity of *O(n)* and a space complexity of *O(1)*.

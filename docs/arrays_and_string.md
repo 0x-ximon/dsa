@@ -1,0 +1,21 @@
+# Arrays and Strings
+
+*Simon Samuel · 2025-01-01*
+
+## Introduction to 2D Array
+
+A two dimensional array is simply a data structure that can be used to store grid like data such as tables or matrices. The underlying structure of the multidimensional array is largely dependent on the language itself. In some languages, the **multidimensional array** is actually implemented internally as a **one-dimensional array**, while in other languages there are no **multidimensional arrays** at all.
+
+C++ stores the array internally as a one-dimensional array while Java stores it as a one-dimensional array of M elements, each of which is an array of N elements.
+
+## Introduction to Strings
+
+A string is just an array of `Unicode Characters`, hence every operation that can be performed on an array can equally be performed on a string but there are some similarities like the comparison operator can be applied to strings safely on languages like C++ but does not work as expected on Java and JavaScript.
+
+### String Search Algorithms
+
+[String Search](https://en.wikipedia.org/wiki/String-searching_algorithm) is a classical problem and a primitive approach would be using a simpler two pointer brute force approach but you can get a better  solution by implementing any of these algorithms.
+
+- [Knuth–Morris–Pratt algorithm](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm)
+- [Boyer–Moore string-search algorithm](https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm)
+- [Rabin–Karp algorithm](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm)

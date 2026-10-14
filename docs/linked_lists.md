@@ -1,17 +1,19 @@
-#+title: Linked Lists
-#+author: Simon Samuel
-#+date: 20th April, 2024
+# Linked Lists
+
+*Simon Samuel · 20th April, 2024*
 
 Linked lists are linear data structures in which each item of the list holds data and a reference to another list node, this linking is how it keeps a relationship to other items in the list.
 
 There are two types of linked lists:
-    1. Singly Linked List
-    2. Doubly Linked List  
 
-* Singly Linked List
+1. Singly Linked List
+2. Doubly Linked List
+
+## Singly Linked List
+
 Each node in the singly linked list contains not only the value but also a reference field to the next node. In this way, the list can store the values in a sequence. Here is the structure for creating a node in the linked list.
 
-#+begin_src cpp
+```cpp
 #include <cstddef>
 using namespace std;
 
@@ -20,26 +22,27 @@ struct ListNode {
     // We store the memory address of the next node here. 
     ListNode* next;
 
-
     ListNode(int value) {
         this->data = value;
         this->next = NULL;
     }
 }
-#+end_src cpp
+```
 
-** Operations
-Unlike the array, we're not able to access elements in constant time and have to iterate through the entire list to get the data we want. This makes accessing data in a linked list a /O(n)/ operation.
+### Operations
 
-*** Inserting a new Node
+Unlike the array, we're not able to access elements in constant time and have to iterate through the entire list to get the data we want. This makes accessing data in a linked list a *O(n)* operation.
+
+#### Inserting a new Node
+
 Despite its poor data access capabilities, inserting an item into any part of the linked list is relatively straightforward. You simply have to:
 
-    1. Set the ~next~ attribute of the new node to the ~next~ of the node before it.
-    2. Set the ~next~ of the node before the new node to the new node.   
+1. Set the `next` attribute of the new node to the `next` of the node before it.
+2. Set the `next` of the node before the new node to the new node.
 
-The time complexity for inserting into a linked list is /O(1)/. 
+The time complexity for inserting into a linked list is *O(1)*.
 
-#+begin_src cpp
+```cpp
 #include <cstddef>
 #include <iostream>
 
@@ -93,13 +96,13 @@ int main() {
     // Print out the modified array.
     head.displayList();
 };
-#+end_src cpp
+```
 
+#### Deleting a node
 
-*** Deleting a node
 Similar to how it was easy to insert a node into the linked list, deleting a node is equally as straightforward.
 
-#+begin_src cpp
+```cpp
 #include <cstddef>
 #include <iostream>
 
@@ -151,11 +154,11 @@ int main() {
     // Print out the modified array.
     head.displayList();
 };
-#+end_src cpp
+```
 
+### Fully Functional Linked List
 
-** Fully Functional Linked List
-#+begin_src cpp
+```cpp
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
@@ -320,24 +323,24 @@ class MyLinkedList {
         cout << "Cleaned up memory" << endl;
     }
 };
-#+end_src cpp
+```
 
+### Two Pointer Technique
 
-
-** Two Pointer Technique
 There are two scenarios where you'd want to use the two-pointer approach:
 
-1. Two pointers *start at different positions*.
-2. Two pointers *move with different speeds*.
+1. Two pointers **start at different positions**.
+2. Two pointers **move with different speeds**.
 
-   We will look at the second scenario in detail as the solution is implementing *Floyd's cycle-finding algorithm*.
+   We will look at the second scenario in detail as the solution is implementing **Floyd's cycle-finding algorithm**.
 
-** Floyd's cycle-detection Algorithm
-Floyd's cycle-detection Algorithm is an algorithm where two pointers represented by a Tortoise and a Hare both traverse a linked list at different speeds. The algorithm works by considering an important factor: /If there is no cycle in the list, the end node would point to a ~nullptr~ and the fast pointer: the hare, would be null at a certain point.
+### Floyd's cycle-detection Algorithm
+
+Floyd's cycle-detection Algorithm is an algorithm where two pointers represented by a Tortoise and a Hare both traverse a linked list at different speeds. The algorithm works by considering an important factor: *if there is no cycle in the list, the end node would point to a `nullptr` and the fast pointer, the hare, would be null at a certain point.*
 
 If there is a cycle at some point during the traversal both pointers will inevitably meet at a single node which does not particularly need to be the node when the cycle occurs.
 
-#+begin_src cpp
+```cpp
 #include "./Linked_List_Node.cpp"
 
 class Solution {
@@ -391,13 +394,13 @@ class Solution {
         return slow;
     }
 };
-#+end_src
+```
 
+### Intersection Detection Algorithm
 
-** Intersection Detection Algorithm
 Finding the node where two linked lists intercept can also be done using the Two pointer Technique in O(m + n) time as both lists would sync up after they both meet the end of their respective list. Here is the implementation of this algorithm.
 
-#+begin_src cpp
+```cpp
 #include "./Linked_List_Node.cpp"
 
 class Solution {
@@ -417,13 +420,13 @@ class Solution {
         return p;
     }
 };
-#+end_src cpp
+```
 
+### Reversing a Linked List
 
-** Reversing a Linked List
 A very common and classic computer science problem:
 
-#+begin_src cpp
+```cpp
 #include "./Linked_List_Node.cpp"
 
 class Solution {
@@ -443,13 +446,13 @@ class Solution {
         return prevNode;
     }
 };
-#+end_src cpp
+```
 
+### Removing Elements from a Linked List
 
-** Removing Elements from a Linked List
 Here is a simple implementation for removing a value from a linked list.
 
-#+begin_src cpp
+```cpp
 #include "./Linked_List_Node.cpp"
 
 class Solution {
@@ -487,13 +490,13 @@ class Solution {
         return head;
     }
 };
-#+end_src cpp
+```
 
+## Doubly Linked List
 
-* Doubly Linked List
-A doubly linked list is just a regular linked list but with the `prev` field for reversing the prior node so we can also traverse backwards. 
+A doubly linked list is just a regular linked list but with the `prev` field for reversing the prior node so we can also traverse backwards.
 
-#+begin_src cpp
+```cpp
 #include <cstddef>
 using namespace std;
 
@@ -503,18 +506,17 @@ struct ListNode {
     ListNode* next;
     ListNode* prev;
 
-
     ListNode(int value) {
         this->data = value;
         this->next = nullptr;
         this->next = nullptr;
     }
 }
-#+end_src cpp
+```
 
-** Fully Functional Doubly Linked List
+### Fully Functional Doubly Linked List
 
-#+begin_src cpp
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -747,4 +749,4 @@ class MyLinkedList {
         cout << "Cleaned up memory" << endl;
     }
 };
-#+end_src cpp
+```
