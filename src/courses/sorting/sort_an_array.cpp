@@ -6,14 +6,12 @@ class Solution {
     std::size_t leftChild(int index) { return (2 * index) + 1; }
     std::size_t rightChild(int index) { return (2 * index) + 2; }
 
-    void heapifyDown(std::vector<int>& array, std::size_t index,
-                     std::size_t end) {
+    void heapifyDown(std::vector<int>& array, std::size_t index, std::size_t end) {
         while (this->leftChild(index) <= end) {
             auto left = this->leftChild(index);
             auto right = this->rightChild(index);
 
-            auto larger =
-                right <= end && array[right] > array[left] ? right : left;
+            auto larger = right <= end && array[right] > array[left] ? right : left;
 
             if (array[index] >= array[larger]) break;
             std::swap(array[index], array[larger]);

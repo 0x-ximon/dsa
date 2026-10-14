@@ -7,7 +7,8 @@
 
 class Solution {
    public:
-    std::vector<int> smallestTrimmedNumbers(std::vector<std::string>& nums, std::vector<std::vector<int>>& queries) {
+    std::vector<int> smallestTrimmedNumbers(std::vector<std::string>& nums,
+                                            std::vector<std::vector<int>>& queries) {
         if (nums.size() == 0) return {};
         size_t m = nums.size();
         size_t n = nums[0].size();
@@ -39,10 +40,6 @@ class Solution {
                     starts[c]++;
                 }
             }
-
-            std::print("Buffer: [ ");
-            for (auto b : buffer) std::print("{}, ", b.first);
-            std::println("];");
 
             result.push_back(buffer[k - 1].first);
         }
@@ -82,14 +79,3 @@ class Solution {
         }
     }
 };
-
-int main() {
-    Solution solution{};
-    std::vector<std::string> nums = {"102", "473", "251", "814"};
-    std::vector<std::vector<int>> queries = {{1, 1}, {2, 3}, {4, 2}, {1, 2}};
-    auto result = solution.smallestTrimmedNumbers(nums, queries);
-
-    std::print("[ ");
-    for (auto r : result) std::print("{}, ", r);
-    std::println("];");
-}
