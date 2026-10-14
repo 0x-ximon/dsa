@@ -1,5 +1,4 @@
 #include <vector>
-using namespace std;
 
 struct Node {
     int val;
@@ -12,10 +11,10 @@ struct Node {
 
 class Solution {
    public:
-    vector<Node> generateTrees(int n) {
-        vector<Node> result = {};
+    std::vector<Node> generateTrees(int n) {
+        std::vector<Node> result = {};
         return {};
     }
 
-    void generate(Node root, vector<Node>* result) {}
+    void generate(Node root, std::vector<Node>* result) {}
 };

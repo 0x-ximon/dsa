@@ -1,5 +1,4 @@
 #include <algorithm>
-using namespace std;
 
 struct Node {
     int val;
@@ -13,11 +12,14 @@ struct Node {
 class Solution {
    public:
     int maxDepth(Node* root) { return traverse(root, 1); }
+
     int traverse(Node* node, int depth) {
         if (!node) return depth - 1;
 
-        int largestSubDepth = max(traverse(node->left, depth + 1), traverse(node->right, depth + 1));
+        auto l = traverse(node->left, depth + 1);
+        auto r = traverse(node->right, depth + 1);
 
-        return max(largestSubDepth, depth);
+        int m = std::max(l, r);
+        return std::max(m, depth);
     }
 };

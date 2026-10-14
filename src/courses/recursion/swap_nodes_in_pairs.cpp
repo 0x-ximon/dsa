@@ -8,15 +8,14 @@ struct Node {
 
 class Solution {
    public:
-    Node* swapPairs(Node* head) { return exchange(head); }
-    Node* exchange(Node* node) {
+    Node* swapPairs(Node* node) {
         if (!node || !node->next) return node;
 
-        Node* next = exchange(node->next->next);
+        Node* next = swapPairs(node->next->next);
         Node* head = node->next;
 
-        head->next = node;
         node->next = next;
+        head->next = node;
 
         return head;
     }
