@@ -1,4 +1,5 @@
 #include <iostream>
+#include <print>
 
 // Code: 4A
 // Name: Watermelon
@@ -9,8 +10,8 @@ int main() {
     std::cin >> w;
 
     if (w > 2 && w % 2 == 0)
-        std::cout << "YES";
+        std::println("YES");
 
     else
-        std::cout << "NO";
+        std::println("NO");
 }
