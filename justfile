@@ -1,8 +1,8 @@
 set dotenv-load := true
 
-run path name:
-    g++ -std=c++23 src/{{ path }}/{{ name }}.cpp -o .cpp-build/{{ name }}
-    @./.cpp-build/{{ name }}
+run path program:
+    g++ -std=c++23 src/{{ path }}/{{ program }}.cpp -o .cpp-build/{{ program }}
+    @./.cpp-build/{{ program }}
 
 test limit="1K":
     zig build test --fuzz={{ limit }}
