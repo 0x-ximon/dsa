@@ -8,8 +8,6 @@ fn Equals(comptime T: type) type {
 
 // TODO: Implemnent the `node_hash_map` from abseil Swiss Tables
 pub fn HashMap(comptime K: type, comptime V: type, _: Equals(K)) type {
-    _ = V;
-
     return struct {
         const Self = @This();
 
@@ -26,6 +24,47 @@ pub fn HashMap(comptime K: type, comptime V: type, _: Equals(K)) type {
 
         pub fn deinit(self: Self) void {
             _ = self;
+        }
+
+        pub fn add(self: *Self, allocator: mem.Allocator, key: K, value: V) !void {
+            _ = self;
+            _ = allocator;
+            _ = key;
+            _ = value;
+
+            return Errors.NotImplemented;
+        }
+
+        pub fn rid(self: *Self, allocator: mem.Allocator, key: K) !V {
+            _ = self;
+            _ = allocator;
+            _ = key;
+
+            return Errors.NotImplemented;
+        }
+
+        pub fn get(self: *Self, allocator: mem.Allocator, key: K) ?V {
+            _ = self;
+            _ = allocator;
+            _ = key;
+
+            return null;
+        }
+
+        pub fn set(self: *Self, allocator: mem.Allocator, key: K) !V {
+            _ = self;
+            _ = allocator;
+            _ = key;
+
+            return null;
+        }
+
+        pub fn has(self: *Self, allocator: mem.Allocator, key: K) bool {
+            _ = self;
+            _ = allocator;
+            _ = key;
+
+            return false;
         }
 
         pub fn count(self: Self) usize {
