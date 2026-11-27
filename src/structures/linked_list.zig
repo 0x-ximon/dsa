@@ -29,16 +29,14 @@ pub fn LinkedList(comptime T: type) type {
             Back,
         };
 
-        pub const empty: Self = .{
-            .head = null,
-            .tail = null,
-            .length = 0,
-        };
-
         const Errors = error{
             InvalidIndex,
             NotImplemented,
         };
+
+        pub fn init() Self {
+            return .{ .head = null, .tail = null, .length = 0 };
+        }
 
         /// Frees every node. Does not free values that themselves own memory.
         pub fn deinit(self: Self, allocator: mem.Allocator) void {
@@ -342,7 +340,7 @@ fn testLinkedList(_: Context, smith: *std.testing.Smith) !void {
     var oracle: std.ArrayList(Context.T) = .empty;
     defer oracle.deinit(allocator);
 
-    var list: Context.L = .empty;
+    var list: Context.L = .init();
     defer list.deinit(allocator);
 
     const Operations = enum { add, pop, get, set, put, rid, has };

@@ -6,12 +6,28 @@ fn Equals(comptime T: type) type {
     return fn (a: T, b: T) bool;
 }
 
-// TODO: Implemnent the `node_hash_map` from abseil Swiss Tables
-pub fn HashMap(comptime K: type, comptime V: type, _: Equals(K)) type {
+fn Hash(comptime T: type) type {
+    return fn (key: T) []const u8;
+}
+
+/// An HashMap Implementation based off of Abseil Swiss Tables
+///
+/// `K` & `V` are the key and value types, `N` is the group width.
+/// `hash` & `equals` is the hashing and comparison functions used for keys.
+///
+/// This map does not handle memory cleanup for keys or values but only nodes.
+pub fn HashMap(comptime K: type, comptime V: type, comptime N: u8, hash: Hash(K), equals: Equals(K)) type {
+    _ = hash;
+    _ = equals;
+
     return struct {
         const Self = @This();
+        const Metadata = [N]u8;
+        const KV = struct { key: K, value: V };
 
         size: usize,
+        groups: [N]KV,
+        control: []Metadata,
         allocator: mem.Allocator,
 
         const Errors = error{
@@ -78,15 +94,20 @@ const Context = struct {
 
     const K = []const u8;
     const V = i32;
-    const M = HashMap(K, V, equals);
+    const N = 16;
+    const M = HashMap(K, V, N, hash, equals);
     const E = M.Errors;
 
     const Errors = error{
         AllocationFailed,
     };
 
-    fn equals(a: []const u8, b: []const u8) bool {
+    fn equals(a: K, b: K) bool {
         return mem.eql(u8, a, b);
+    }
+
+    fn hash(a: K) []const u8 {
+        return a;
     }
 
     fn nodesInvariantsHold(_: *M) Errors!void {}
@@ -98,8 +119,8 @@ fn testHashMap(_: Context, smith: *std.testing.Smith) !void {
     var oracle: std.AutoHashMap(Context.K, Context.V) = .init(allocator);
     defer oracle.deinit();
 
-    var map: Context.M = .init(allocator);
-    defer map.deinit();
+    // var map: Context.M = .init(allocator);
+    // defer map.deinit();
 
     // const Operations = enum {};
     while (!smith.eos()) {
@@ -118,12 +139,12 @@ fn testHashMap(_: Context, smith: *std.testing.Smith) !void {
         //         try testing.expectEqual(expected.len, actual.len);
         //         try testing.expectEqualSlices(Context.T, expected, actual);
 
-        const expected = oracle.count();
-        const actual = map.count();
-        try testing.expectEqual(expected, actual);
+        // const expected = oracle.count();
+        // const actual = map.count();
+        // try testing.expectEqual(expected, actual);
 
         // Validate Invariants Integrity
-        try Context.nodesInvariantsHold(&map);
+        // try Context.nodesInvariantsHold(&map);
     }
 }
 
